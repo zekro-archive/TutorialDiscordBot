@@ -8,4 +8,4 @@
 | #02  	| Listeners & Events 	| https://youtu.be/KtaPRRbV7tM 	| https://gist.github.com/zekroTJA/0f06b352e1c336e0d9cc100e7f8d7c89 	|
 | #03  	| Commands           	| https://youtu.be/Eh6L50ag33g 	| https://gist.github.com/zekroTJA/4e767fcda2cc9d725e56b9dc1db1e20a 	|
 | #04  	| Export & Benutzung 	| https://youtu.be/gx1QcYoZuaI 	| -/-                                                               	|
-| #05  	| Permissions        	| -/-                          	| -/-                                                               	|
+| #05  	| Permissions        	| https://youtu.be/1Cx2UY8VZSQ 	| https://gist.github.com/zekroTJA/9b444793f205658f87be064d68d955cd 	|
