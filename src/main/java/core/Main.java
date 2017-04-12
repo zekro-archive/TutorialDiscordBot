@@ -1,6 +1,7 @@
 package core;
 
 import commands.cmdPing;
+import commands.say;
 import listeners.commandListener;
 import listeners.readyListener;
 import listeners.voiceListener;
@@ -63,6 +64,7 @@ public class Main {
     public static void addCommands() {
 
         commandHandler.commands.put("ping", new cmdPing());
+        commandHandler.commands.put("say", new say());
 
     }
 

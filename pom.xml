@@ -17,9 +17,19 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mashape.unirest</groupId>
+            <artifactId>unirest-java</artifactId>
+            <version>1.4.9</version>
+        </dependency>
+        <dependency>
             <groupId>net.dv8tion</groupId>
-            <artifactId>jda</artifactId>
-            <version>3.0.ALPHA_65</version>
+            <artifactId>JDA</artifactId>
+            <version>3.0.0_157</version>
         </dependency>
     </dependencies>
 
