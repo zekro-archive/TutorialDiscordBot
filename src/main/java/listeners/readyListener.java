@@ -22,11 +22,11 @@ public class readyListener extends ListenerAdapter {
 
         System.out.println(out);
 
-        for (Guild g : event.getJDA().getGuilds() ) {
-            g.getTextChannels().get(0).sendMessage(
-                    "Hey guys! Im back again!"
-            ).queue();
-        }
+        //for (Guild g : event.getJDA().getGuilds() ) {
+        //    g.getTextChannels().get(0).sendMessage(
+        //            "Hey guys! Im back again!"
+        //    ).queue();
+        //}
 
     }
 
