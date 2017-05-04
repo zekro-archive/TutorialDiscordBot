@@ -10,3 +10,4 @@
 | #04  	| Export & Benutzung 	| https://youtu.be/gx1QcYoZuaI 	| -/-                                                               	|
 | #05  	| Permissions        	| https://youtu.be/1Cx2UY8VZSQ 	| https://gist.github.com/zekroTJA/9b444793f205658f87be064d68d955cd 	|
 | #06  	| Arguments         	| https://youtu.be/1Cx2UY8VZSQ 	| https://gist.github.com/zekroTJA/7da338bc1cf4e9aa96a32ef58f4e0a64 	|
+| #07  	| Clear Command      	| https://youtu.be/xXFypYc5BBc 	| https://gist.github.com/zekroTJA/b69127755f95a156dc8286e525738347 	|
