@@ -58,16 +58,12 @@ public class Main {
             e.printStackTrace();
         }
 
-
-
     }
 
     public static void addCommands() {
 
         commandHandler.commands.put("ping", new cmdPing());
         commandHandler.commands.put("say", new say());
-        commandHandler.commands.put("music", new Music());
-        commandHandler.commands.put("m", new Music());
         commandHandler.commands.put("test", new Test());
         commandHandler.commands.put("clear", new Clear());
     }
