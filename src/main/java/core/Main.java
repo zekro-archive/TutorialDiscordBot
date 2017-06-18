@@ -13,13 +13,13 @@ import net.dv8tion.jda.core.exceptions.RateLimitedException;
 import util.SECRETS;
 import util.STATIC;
 
-import javax.security.auth.login.LoginException;
+import java.lang.Exception;
 
 public class Main {
 
     public static JDABuilder builder;
 
-    public static void main(String[] Args) {
+    public static void main(String[] Args) throws Exception { // Alle Exceptions sind Erweiterungen der nornalen Exception
 
         builder = new JDABuilder(AccountType.BOT);
 
