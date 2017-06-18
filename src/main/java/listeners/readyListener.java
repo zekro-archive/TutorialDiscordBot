@@ -16,11 +16,7 @@ public class readyListener extends ListenerAdapter {
 
         String out = "\nThis bot is running on following servers: \n";
 
-        for (Guild g : event.getJDA().getGuilds() ) {
-            out += g.getName() + " (" + g.getId() + ") \n";
-        }
-
-        System.out.println(out);
+        System.out.println(out + event.getJDA().getGuilds().stteam().map(guild->guild.getName()+" ("+guild.getIdLong()+")").collect(Collectors.joining("\n")));
 
         //for (Guild g : event.getJDA().getGuilds() ) {
         //    g.getTextChannels().get(0).sendMessage(
