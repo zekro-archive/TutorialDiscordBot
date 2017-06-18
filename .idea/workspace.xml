@@ -6,7 +6,10 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="73c84ae0-cdfe-4727-a375-a6e05d59923e" name="Default" comment="" />
+    <list default="true" id="73c84ae0-cdfe-4727-a375-a6e05d59923e" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/commands/Music.java" afterPath="$PROJECT_DIR$/src/main/java/commands/Music.java" />
+    </list>
     <ignored path="supremeBot.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -34,7 +37,7 @@
               <caret line="52" column="36" lean-forward="false" selection-start-line="52" selection-start-column="36" selection-end-line="52" selection-end-column="36" />
               <folding>
                 <element signature="class#809:1169" expanded="false" />
-                <marker date="1497775970950" expanded="true" signature="1893:2054" ph="{...}" />
+                <marker date="1497776127651" expanded="true" signature="1893:2054" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -43,8 +46,8 @@
       <file leaf-file-name="Music.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/commands/Music.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="487">
-              <caret line="93" column="22" lean-forward="false" selection-start-line="93" selection-start-column="22" selection-end-line="93" selection-end-column="22" />
+            <state relative-caret-position="219">
+              <caret line="280" column="31" lean-forward="false" selection-start-line="280" selection-start-column="31" selection-end-line="280" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1584#1585#0" expanded="true" />
@@ -55,6 +58,24 @@
                 <element signature="e#2835#2836#0" expanded="true" />
                 <element signature="e#3021#3022#0" expanded="true" />
                 <element signature="e#3099#3100#0" expanded="true" />
+                <element signature="e#4161#4162#0" expanded="true" />
+                <element signature="e#4225#4226#0" expanded="true" />
+                <element signature="e#4314#4315#0" expanded="true" />
+                <element signature="e#4373#4374#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TrackManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/AudioCore/TrackManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="269">
+              <caret line="117" column="39" lean-forward="false" selection-start-line="117" selection-start-column="39" selection-end-line="117" selection-end-column="39" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1614#1615#0" expanded="true" />
+                <element signature="e#1663#1664#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -76,6 +97,7 @@
       <find>Play</find>
       <find>bui</find>
       <find>manager</find>
+      <find>PlayerSendHandler</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -117,8 +139,8 @@
         <option value="$PROJECT_DIR$/src/main/java/AudioCore/PlayerSenderHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/AudioCore/PlayerSendHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/core/Main.java" />
-        <option value="$PROJECT_DIR$/src/main/java/commands/Music.java" />
         <option value="$PROJECT_DIR$/src/main/java/AudioCore/AudioInfo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/commands/Music.java" />
       </list>
     </option>
   </component>
@@ -780,13 +802,14 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934928" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20257235" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35691318" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -816,7 +839,6 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934928" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -858,7 +880,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="class#809:1169" expanded="false" />
-            <marker date="1497775970950" expanded="true" signature="1893:2054" ph="{...}" />
+            <marker date="1497776127651" expanded="true" signature="1893:2054" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -876,7 +898,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="class#809:1169" expanded="false" />
-            <marker date="1497775970950" expanded="true" signature="1893:2054" ph="{...}" />
+            <marker date="1497776127651" expanded="true" signature="1893:2054" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -894,7 +916,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="class#809:1169" expanded="false" />
-            <marker date="1497775970950" expanded="true" signature="1893:2054" ph="{...}" />
+            <marker date="1497776127651" expanded="true" signature="1893:2054" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -905,7 +927,7 @@
           <caret line="29" column="46" lean-forward="false" selection-start-line="29" selection-start-column="46" selection-end-line="29" selection-end-column="46" />
           <folding>
             <element signature="class#809:1169" expanded="false" />
-            <marker date="1497775970950" expanded="true" signature="1893:2054" ph="{...}" />
+            <marker date="1497776127651" expanded="true" signature="1893:2054" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -923,7 +945,7 @@
           <caret line="19" column="50" lean-forward="false" selection-start-line="19" selection-start-column="50" selection-end-line="19" selection-end-column="50" />
           <folding>
             <element signature="class#809:1169" expanded="false" />
-            <marker date="1497775970950" expanded="true" signature="1893:2054" ph="{...}" />
+            <marker date="1497776127651" expanded="true" signature="1893:2054" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -948,7 +970,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="class#809:1169" expanded="false" />
-            <marker date="1497775970950" expanded="true" signature="1893:2054" ph="{...}" />
+            <marker date="1497776127651" expanded="true" signature="1893:2054" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -973,7 +995,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="class#809:1169" expanded="false" />
-            <marker date="1497775970950" expanded="true" signature="1893:2054" ph="{...}" />
+            <marker date="1497776127651" expanded="true" signature="1893:2054" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -991,7 +1013,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="class#809:1169" expanded="false" />
-            <marker date="1497775970950" expanded="true" signature="1893:2054" ph="{...}" />
+            <marker date="1497776127651" expanded="true" signature="1893:2054" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1124,8 +1146,6 @@
             <element signature="imports" expanded="true" />
             <element signature="e#1614#1615#0" expanded="true" />
             <element signature="e#1663#1664#0" expanded="true" />
-            <element signature="e#2079#2080#0" expanded="true" />
-            <element signature="e#2108#2109#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1155,20 +1175,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AudioCore/TrackManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1989">
-          <caret line="117" column="39" lean-forward="false" selection-start-line="117" selection-start-column="39" selection-end-line="117" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1614#1615#0" expanded="true" />
-            <element signature="e#1663#1664#0" expanded="true" />
-            <element signature="e#2079#2080#0" expanded="true" />
-            <element signature="e#2108#2109#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/com/sedmelluq/lavaplayer/1.2.34/lavaplayer-1.2.34-sources.jar!/com/sedmelluq/discord/lavaplayer/player/AudioPlayerManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="302">
@@ -1183,7 +1189,7 @@
           <caret line="52" column="36" lean-forward="false" selection-start-line="52" selection-start-column="36" selection-end-line="52" selection-end-column="36" />
           <folding>
             <element signature="class#809:1169" expanded="false" />
-            <marker date="1497775970950" expanded="true" signature="1893:2054" ph="{...}" />
+            <marker date="1497776127651" expanded="true" signature="1893:2054" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1202,10 +1208,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AudioCore/TrackManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="117" column="39" lean-forward="false" selection-start-line="117" selection-start-column="39" selection-end-line="117" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1614#1615#0" expanded="true" />
+            <element signature="e#1663#1664#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/commands/Music.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="487">
-          <caret line="93" column="22" lean-forward="false" selection-start-line="93" selection-start-column="22" selection-end-line="93" selection-end-column="22" />
+        <state relative-caret-position="219">
+          <caret line="280" column="31" lean-forward="false" selection-start-line="280" selection-start-column="31" selection-end-line="280" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1584#1585#0" expanded="true" />
@@ -1216,6 +1234,10 @@
             <element signature="e#2835#2836#0" expanded="true" />
             <element signature="e#3021#3022#0" expanded="true" />
             <element signature="e#3099#3100#0" expanded="true" />
+            <element signature="e#4161#4162#0" expanded="true" />
+            <element signature="e#4225#4226#0" expanded="true" />
+            <element signature="e#4314#4315#0" expanded="true" />
+            <element signature="e#4373#4374#0" expanded="true" />
           </folding>
         </state>
       </provider>

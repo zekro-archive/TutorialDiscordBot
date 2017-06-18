@@ -113,12 +113,14 @@ public class Music implements Command {
     private void loadTrack(String identifier, Member author, Message msg) {
 
         Guild guild = author.getGuild();
+        getPlayer(guild);
 
         MANAGER.setFrameBufferDuration(1000);
         MANAGER.loadItemOrdered(guild, identifier, new AudioLoadResultHandler() {
 
             @Override
             public void trackLoaded(AudioTrack track) {
+                System.out.println("TEST");
                 getTrackManager(guild).queue(track, author);
             }
 
@@ -131,12 +133,12 @@ public class Music implements Command {
 
             @Override
             public void noMatches() {
-
+                System.out.println("NO MATCHES");
             }
 
             @Override
             public void loadFailed(FriendlyException exception) {
-
+                exception.printStackTrace();
             }
         });
 
@@ -207,7 +209,7 @@ public class Music implements Command {
                     sendErrorMsg(event, "Pelase include a valid source!");
                     return;
                 }
-                String input = Arrays.stream(args).skip(1).map(s -> s + " ").collect(Collectors.joining());
+                String input = Arrays.stream(args).skip(1).map(s -> " " + s).collect(Collectors.joining()).substring(1);
 
                 if (!(input.startsWith("http://") || input.startsWith("https://"))) {
                     input = "ytsearch: " + input;
