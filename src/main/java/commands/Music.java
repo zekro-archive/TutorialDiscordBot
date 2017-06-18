@@ -7,7 +7,6 @@ import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
-import com.sedmelluq.discord.lavaplayer.source.AudioSourceManager;
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
@@ -22,7 +21,6 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
@@ -36,15 +34,15 @@ public class Music implements Command {
 
     private static final int PLAYLIST_LIMIT = 1000;
     private static Guild guild;
-    private static final AudioPlayerManager manager = new DefaultAudioPlayerManager();
-    private static final Map<Guild, Map.Entry<AudioPlayer, TrackManager>> players = new HashMap<>();
+    private static final AudioPlayerManager MANAGER = new DefaultAudioPlayerManager();
+    private static final Map<Guild, Map.Entry<AudioPlayer, TrackManager>> PLAYERS = new HashMap<>();
 
 
     /**
      * Registrieren des Players als AudioSource für den AudioStream
      */
     public Music() {
-        AudioSourceManagers.registerRemoteSources(manager);
+        AudioSourceManagers.registerRemoteSources(MANAGER);
     }
 
     /**
@@ -53,12 +51,12 @@ public class Music implements Command {
      * @return AudioPlayer
      */
     private AudioPlayer createPlayer(Guild g) {
-        AudioPlayer p = manager.createPlayer();
+        AudioPlayer p = MANAGER.createPlayer();
         TrackManager m = new TrackManager(p);
         p.addListener(m);
         guild.getAudioManager().setSendingHandler(new PlayerSendHandler(p));
 
-        players.put(g, new AbstractMap.SimpleEntry<>(p, m));
+        PLAYERS.put(g, new AbstractMap.SimpleEntry<>(p, m));
 
         return p;
     }
@@ -70,7 +68,7 @@ public class Music implements Command {
      * @return Guild hat player
      */
     private boolean hasPlayer(Guild g) {
-        return players.containsKey(g);
+        return PLAYERS.containsKey(g);
     }
 
 
@@ -81,7 +79,7 @@ public class Music implements Command {
      */
     private AudioPlayer getPlayer(Guild g) {
         if (hasPlayer(g))
-            return players.get(g).getKey();
+            return PLAYERS.get(g).getKey();
         else
             return createPlayer(g);
     }
@@ -93,7 +91,7 @@ public class Music implements Command {
      * @return TrackManager
      */
     private TrackManager getTrackManager(Guild g) {
-        return players.get(g).getValue();
+        return PLAYERS.get(g).getValue();
     }
 
 
@@ -116,8 +114,8 @@ public class Music implements Command {
 
         Guild guild = author.getGuild();
 
-        manager.setFrameBufferDuration(1000);
-        manager.loadItemOrdered(guild, identifier, new AudioLoadResultHandler() {
+        MANAGER.setFrameBufferDuration(1000);
+        MANAGER.loadItemOrdered(guild, identifier, new AudioLoadResultHandler() {
 
             @Override
             public void trackLoaded(AudioTrack track) {

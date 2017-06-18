@@ -12,8 +12,8 @@ import net.dv8tion.jda.core.entities.Member;
 
 public class AudioInfo {
 
-    private final AudioTrack track;
-    private final Member author;
+    private final AudioTrack TRACK;
+    private final Member AUTHOR;
 
     /**
      * Erstellen von Instanzen der Klasse
@@ -21,16 +21,16 @@ public class AudioInfo {
      * @param author Einreiher des Tracks
      */
     AudioInfo(AudioTrack track, Member author) {
-        this.author = author;
-        this.track = track;
+        this.AUTHOR = author;
+        this.TRACK = track;
     }
 
     public AudioTrack getTrack() {
-        return track;
+        return TRACK;
     }
 
     public Member getAuthor() {
-        return author;
+        return AUTHOR;
     }
 
 }
