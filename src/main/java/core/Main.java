@@ -24,7 +24,7 @@ public class Main {
         builder = new JDABuilder(AccountType.BOT);
 
         builder.setToken(SECRETS.TOKEN);
-        builder.setAutoReconnect(true);
+        //builder.setAutoReconnect(true); default ist true!
 
         builder.setStatus(OnlineStatus.DO_NOT_DISTURB);
 
@@ -47,17 +47,6 @@ public class Main {
 
         addListeners();
         addCommands();
-
-        try {
-            JDA jda = builder.buildBlocking();
-        } catch (LoginException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (RateLimitedException e) {
-            e.printStackTrace();
-        }
-
     }
 
     public static void addCommands() {
@@ -71,10 +60,7 @@ public class Main {
 
     public static void addListeners() {
 
-        builder.addListener(new commandListener());
-        builder.addListener(new readyListener());
-        builder.addListener(new voiceListener());
-
+        builder.addListener(new commandListener(), new readyListener(), new voiceListener());
     }
 
 }
