@@ -15,7 +15,7 @@ public class commandParser {
     public static commandContainer parser(String raw, MessageReceivedEvent event) {
 
         String beheaded = raw.replaceFirst(STATIC.PREFIX, "");
-        String[] splitBeheaded = beheaded.split(" ");
+        String[] splitBeheaded = beheaded.split("\\s+"); //Unterschied zwischen " " und "\\s+" ist das die Anzahl der Space, Taos usw egal ist
         String invoke = splitBeheaded[0];
         ArrayList<String> split = new ArrayList<>();
         for ( String s : splitBeheaded ) {
