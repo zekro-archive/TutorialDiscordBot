@@ -11,4 +11,5 @@
 | #05  	| Permissions        	| https://youtu.be/1Cx2UY8VZSQ 	| https://gist.github.com/zekroTJA/9b444793f205658f87be064d68d955cd 	|
 | #06  	| Arguments         	| https://youtu.be/1Cx2UY8VZSQ 	| https://gist.github.com/zekroTJA/7da338bc1cf4e9aa96a32ef58f4e0a64 	|
 | #07  	| Clear Command      	| https://youtu.be/xXFypYc5BBc 	| https://gist.github.com/zekroTJA/b69127755f95a156dc8286e525738347 	|
-| #08 & #09  	| Music Bot     | https://youtu.be/yduGuCOpV2k 	| https://gist.github.com/zekroTJA/2f7728bfe835168fe6f1a46b55d8e3cd 	|
+| #08  	| Music Bot [1/2]     | https://youtu.be/yduGuCOpV2k 	| https://gist.github.com/zekroTJA/2f7728bfe835168fe6f1a46b55d8e3cd 	|
+| #09  	| Music Bot [2/2]     | ~soon~                        | https://gist.github.com/zekroTJA/2f7728bfe835168fe6f1a46b55d8e3cd 	|
