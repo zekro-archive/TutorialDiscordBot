@@ -66,6 +66,8 @@ public class Main {
         commandHandler.commands.put("say", new say());
         commandHandler.commands.put("test", new Test());
         commandHandler.commands.put("clear", new Clear());
+        commandHandler.commands.put("m", new Music());
+        commandHandler.commands.put("music", new Music());
     }
 
     public static void addListeners() {
