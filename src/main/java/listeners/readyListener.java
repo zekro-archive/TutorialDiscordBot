@@ -22,6 +22,8 @@ public class readyListener extends ListenerAdapter {
 
         System.out.println(out);
 
+        commands.Vote.loadAllPolls(event);
+
         //for (Guild g : event.getJDA().getGuilds() ) {
         //    g.getTextChannels().get(0).sendMessage(
         //            "Hey guys! Im back again!"

@@ -9,7 +9,7 @@ import core.permsCore;
  * @author zekro
  */
 
-public class cmdPing implements Command {
+public class Ping implements Command {
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {

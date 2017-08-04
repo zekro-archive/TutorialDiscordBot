@@ -62,12 +62,13 @@ public class Main {
 
     public static void addCommands() {
 
-        commandHandler.commands.put("ping", new cmdPing());
-        commandHandler.commands.put("say", new say());
+        commandHandler.commands.put("ping", new Ping());
+        commandHandler.commands.put("Say", new Say());
         commandHandler.commands.put("test", new Test());
         commandHandler.commands.put("clear", new Clear());
         commandHandler.commands.put("m", new Music());
         commandHandler.commands.put("music", new Music());
+        commandHandler.commands.put("vote", new Vote());
     }
 
     public static void addListeners() {
