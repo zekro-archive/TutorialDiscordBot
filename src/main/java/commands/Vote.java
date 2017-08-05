@@ -11,6 +11,7 @@ import util.STATIC;
 import java.awt.Color;
 import java.io.*;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by zekro on 04.08.2017 / 15:16
@@ -77,18 +78,18 @@ public class Vote implements Command, Serializable {
      */
     private EmbedBuilder getParsedPoll(Poll poll, Guild guild) {
 
-        String ansSTR = "";
-        int count = 0;
-        for ( String s : poll.answers ) {
-            final int ccount = count;
-            int votescount = poll.votes.values().stream().filter(i -> i - 1 == ccount).findFirst().orElse(0);
-            ansSTR += emoti[count] + "  -  " + s + "  -  Votes: `" + votescount + "`\n";
-            count++;
-        }
+        StringBuilder ansSTR = new StringBuilder();
+        final AtomicInteger count = new AtomicInteger();
+
+        poll.answers.forEach(s -> {
+            int votescount = poll.votes.values().stream().filter(i -> i - 1 == count.get()).findFirst().orElse(0);
+            ansSTR.append(emoti[count.get()] + "  -  " + s + "  -  Votes: `" + votescount + "`\n");
+            count.addAndGet(1);
+        });
 
         return new EmbedBuilder()
                 .setAuthor(poll.getCreator(guild).getEffectiveName() + "'s poll.", null, poll.getCreator(guild).getUser().getAvatarUrl())
-                .setDescription(":pencil:   " + poll.heading + "\n\n" + ansSTR)
+                .setDescription(":pencil:   " + poll.heading + "\n\n" + ansSTR.toString())
                 .setFooter("Enter '" + STATIC.PREFIX + "vote v <number>' to vote!", null)
                 .setColor(Color.cyan);
     }
