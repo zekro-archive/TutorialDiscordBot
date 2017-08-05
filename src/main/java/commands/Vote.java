@@ -4,9 +4,7 @@ import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import util.STATIC;
 
@@ -26,35 +24,22 @@ public class Vote implements Command, Serializable {
 
     private static TextChannel channel;
 
-    private static HashMap<Guild, Poll> voteHash = new HashMap<>();
+    private static HashMap<Guild, Poll> polls = new HashMap<>();
 
+    // Liste an emoticons für die nummer der antworten auf den Poll
     private String[] emoti = {":one:", ":two:", ":three:", ":four:", ":five:", ":six:", ":seven:", ":eight:", ":nine:", ":keycap_ten:"};
-
-
-    static void message(String content) {
-        EmbedBuilder emb = new EmbedBuilder().setDescription(content);
-        channel.sendMessage(emb.build()).queue();
-    }
-
-    static void message(String content, Color color) {
-        EmbedBuilder emb = new EmbedBuilder().setDescription(content).setColor(color);
-        channel.sendMessage(emb.build()).queue();
-    }
-
 
     private class Poll implements Serializable {
 
-        private String guild;
-        private String message;
         private String creator;
-        private List<String> content;
+        private String heading;
+        private List<String> answers;
         private HashMap<String, Integer> votes;
 
-        private Poll(Guild guild, Member creator, Message message, List<String> content) {
-            this.message = message.getId();
-            this.guild = guild.getId();
+        private Poll(Member creator, String heading, List<String> answers) {
             this.creator = creator.getUser().getId();
-            this.content = content;
+            this.heading = heading;
+            this.answers = answers;
             this.votes = new HashMap<>();
         }
 
@@ -62,140 +47,169 @@ public class Vote implements Command, Serializable {
             return guild.getMember(guild.getJDA().getUserById(creator));
         }
 
-        private Guild getGuild(JDA jda) {
-            return jda.getGuildById(guild);
-        }
-
-        private Message getMessage(Guild guild) {
-            ArrayList<Message> msgs = new ArrayList<>();
-            guild.getTextChannels().forEach(c -> msgs.add(c.getMessageById(message).complete()));
-            return msgs.get(0);
-        }
-
-        private HashMap<Member, Integer> getVotes(Guild guild) {
-            HashMap<Member, Integer> out = new HashMap<>();
-            votes.forEach((s, integer) -> out.put(guild.getMember(guild.getJDA().getUserById(s)), integer));
-            return out;
-        }
-
     }
 
 
-    private void createPoll(String[] args, MessageReceivedEvent event) {
+    /**
+     * Sendet eine embed message mit default color
+     * @param content
+     */
+    static void message(String content) {
+        EmbedBuilder emb = new EmbedBuilder().setDescription(content);
+        channel.sendMessage(emb.build()).queue();
+    }
 
-        if (voteHash.containsKey(event.getGuild())) {
-            message("A poll is currently running! Please close that poll before opening another one!", Color.red);
-            return;
-        }
+    /**
+     * Overload: Sendet message mit angegebener color
+     * @param content
+     * @param color
+     */
+    static void message(String content, Color color) {
+        EmbedBuilder emb = new EmbedBuilder().setDescription(content).setColor(color);
+        channel.sendMessage(emb.build()).queue();
+    }
 
-        StringBuilder argsAS = new StringBuilder();
-        Arrays.stream(args).skip(1).forEach(s -> argsAS.append(s + " "));
 
-        List<String> thiscontent = Arrays.asList(argsAS.toString().split("\\|"));
+    /**
+     * Returnt die heading und die antwortem der message aus dem poll
+     * @param poll
+     * @return
+     */
+    private EmbedBuilder getParsedPoll(Poll poll, Guild guild) {
 
-        StringBuilder sb = new StringBuilder();
+        String ansSTR = "";
         int count = 0;
-        ArrayList<String> thisconv = new ArrayList<>();
-        thiscontent.stream().skip(1).forEach(thisconv::add);
-        for ( String s : thisconv ) {
-            sb.append("" + emoti[count] + "  -  " + s + "\n");
+        for ( String s : poll.answers ) {
+            final int ccount = count;
+            int votescount = poll.votes.values().stream().filter(i -> i - 1 == ccount).findFirst().orElse(0);
+            ansSTR += emoti[count] + "  -  " + s + "  -  Votes: `" + votescount + "`\n";
             count++;
         }
 
-        Message msg =   event.getTextChannel().sendMessage(new EmbedBuilder().setColor(new Color(0x007FFF))
-                .setTitle(":pencil:   " + event.getMember().getEffectiveName() + " created new vote.", null)
-                .setDescription("\n" + thiscontent.get(0) + "\n\n" + sb.toString() + "\n\n*Use `" + STATIC.PREFIX + "vote v <number>` to vote.*")
-                .build()).complete();
+        return new EmbedBuilder()
+                .setAuthor(poll.getCreator(guild).getEffectiveName() + "'s poll.", null, poll.getCreator(guild).getUser().getAvatarUrl())
+                .setDescription(":pencil:   " + poll.heading + "\n\n" + ansSTR)
+                .setFooter("Enter '" + STATIC.PREFIX + "vote v <number>' to vote!", null)
+                .setColor(Color.cyan);
+    }
 
-        voteHash.put(event.getGuild(), new Poll(event.getGuild(), event.getMember(), msg, thiscontent));
+
+    /**
+     * Erstellt eine Poll instanz und packt sie in die poll HashMap
+     * Gibt poll als message wieder
+     * @param args
+     * @param event
+     */
+    private void createPoll(String[] args, MessageReceivedEvent event) {
+
+        if (polls.containsKey(event.getGuild())) {
+            message("On this guild is currently still a poll running!", Color.red);
+            return;
+        }
+
+        // new ArrayList<>(), weil Arrays.asList(args).subList(1, args.length) erzeugt "NotSerializable" Exception für "RandomAccessSubList"
+        // Quelle: https://stackoverflow.com/questions/6189704/how-to-take-a-valid-sublist-in-java
+        String argsSTR = String.join(" ", new ArrayList<>(Arrays.asList(args).subList(1, args.length)));
+        List<String> content = Arrays.asList(argsSTR.split("\\|"));
+        String heading = content.get(0);
+        List<String> answers = new ArrayList<>(content.subList(1, content.size()));
+
+        Poll poll = new Poll(event.getMember(), heading, answers);
+        polls.put(event.getGuild(), poll);
+
+        event.getTextChannel().sendMessage(getParsedPoll(poll, event.getGuild()).build()).queue();
 
     }
 
+
+    /**
+     * Fügt der votes map in der poll instanz den vote des authors hinzu
+     * @param args
+     * @param event
+     */
     private void votePoll(String[] args, MessageReceivedEvent event) {
 
-        if (args.length < 2) {
-            message(help(), Color.red);
-            return;
-        } else if (!voteHash.containsKey(event.getGuild())) {
-            message("There is currently no poll running to vote for!", Color.red);
-            return;
-        } else if (voteHash.get(event.getGuild()).getVotes(event.getGuild()).containsKey(event.getMember())) {
-            message("Sorry, " + event.getAuthor().getAsMention() + ", you can only vote **once** for a poll!", Color.red);
+        if (!polls.containsKey(event.getGuild())) {
+            message("There is currently no poll to vote for!", Color.red);
             return;
         }
 
-        int votenumb;
+        Poll poll = polls.get(event.getGuild());
+
+        int vote;
         try {
-            votenumb = Integer.parseInt(args[1]);
-        } catch (Exception e) {
-            message("Please enter a valid number as vote.", Color.red);
+            vote = Integer.parseInt(args[1]);
+            if (vote > poll.answers.size())
+                throw new Exception();
+        }
+        catch (Exception e) {
+            message("Please enter a valid number for the vote!", Color.red);
             return;
         }
 
-        if (votenumb > voteHash.get(event.getGuild()).content.stream().skip(1).count()) {
-            message("Please enter a valid number as vote.", Color.red);
+        if (poll.votes.containsKey(event.getAuthor().getId())) {
+            message("Sorry, but you have already voted for this poll!", Color.red);
             return;
         }
 
-        voteHash.get(event.getGuild()).votes.put(event.getMember().getUser().getId(), votenumb);
-
+        poll.votes.put(event.getAuthor().getId(), vote);
+        polls.replace(event.getGuild(), poll);
         event.getMessage().delete().queue();
 
     }
 
-    private void statsPoll(MessageReceivedEvent event) {
 
-        if (!voteHash.containsKey(event.getGuild())) {
-            message("There is currently no poll running!", Color.red);
+    /**
+     * Sendet eine message mit den momentanen vote stats
+     * @param event
+     */
+    private void voteStats(MessageReceivedEvent event) {
+
+        if (!polls.containsKey(event.getGuild())) {
+            message("There is currently no vote running on this guild!", Color.red);
+            return;
+        }
+        event.getTextChannel().sendMessage(getParsedPoll(polls.get(event.getGuild()), event.getGuild()).build()).queue();
+    }
+
+
+    /**
+     * Sendet die poll stats in den chat und nimmt den polls aus der polls map
+     * @param event
+     */
+    private void closeVote(MessageReceivedEvent event) {
+
+        if (!polls.containsKey(event.getGuild())) {
+            message("There is currently no vote running on this guild!", Color.red);
             return;
         }
 
-        StringBuilder sb = new StringBuilder();
-        int count = 0;
-        ArrayList<String> thisconv = new ArrayList<>();
-        voteHash.get(event.getGuild()).content.stream().skip(1).forEach(thisconv::add);
-        for ( String s : thisconv ) {
-            int thiscount = count;
-            sb.append("" + emoti[count] + "  -  " + s + "  -  Votes: `" + voteHash.get(event.getGuild()).getVotes(event.getGuild()).entrySet().stream().filter(memberIntegerEntry -> memberIntegerEntry.getValue().equals(thiscount + 1)).count() + "` " + "\n");
-            count++;
-        }
+        Poll poll = polls.get(event.getGuild());
 
-        Message msg =   event.getTextChannel().sendMessage(new EmbedBuilder().setColor(new Color(0x007FFF))
-                .setTitle(":pencil:   Current vote from " + event.getMember().getEffectiveName() + ".", null)
-                .setDescription("\n" + voteHash.get(event.getGuild()).content.get(0) + "\n\n" + sb.toString())
-                .build()).complete();
-    }
-
-    private void closePoll(MessageReceivedEvent event) {
-
-        if (!voteHash.containsKey(event.getGuild())) {
-            message("There is currently no poll running to vote for!", Color.red);
+        if (!event.getMember().equals(poll.getCreator(event.getGuild()))) {
+            message("Only the creator of the poll (" + poll.getCreator(event.getGuild()).getAsMention() + ") can close this poll!", Color.red);
             return;
         }
 
-        if (event.getMember().equals(voteHash.get(event.getGuild()).getCreator(event.getGuild()))) {
-            statsPoll(event);
-            voteHash.remove(event.getGuild());
-            new File("SERVER_SETTINGS/" + event.getGuild().getId() + "/vote").delete();
-            event.getTextChannel().sendMessage(new EmbedBuilder().setColor(new Color(0xFF5600)).setDescription("Vote closed by " + event.getMember().getAsMention() + ".").build()).queue();
-        } else {
-            message("Sorry, " + event.getMember().getAsMention() + ", only the creator of the poll or a member with at least permission level 1 can close a running poll.", Color.red);
-        }
+        polls.remove(event.getGuild());
+        event.getTextChannel().sendMessage(getParsedPoll(poll, event.getGuild()).build()).queue();
+        message("Poll closed by " + event.getAuthor().getAsMention() + ".", new Color(0xFF6D00));
 
     }
 
+
+    /**
+     * Saved die instanz der klasse "Poll" in einer datei
+     * @param guild
+     * @throws IOException
+     */
     private void savePoll(Guild guild) throws IOException {
 
-        if (!voteHash.containsKey(guild))
+        if (!polls.containsKey(guild))
             return;
 
         String saveFileName = "SERVER_SETTINGS/" + guild.getId() + "/vote";
-
-        File f = new File("SERVER_SETTINGS/" + guild.getId() + "/");
-        if (!new File(saveFileName).exists())
-            f.mkdirs();
-
-        Poll currPoll = voteHash.get(guild);
+        Poll currPoll = polls.get(guild);
 
         FileOutputStream fos = new FileOutputStream(saveFileName);
         ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -204,26 +218,16 @@ public class Vote implements Command, Serializable {
 
     }
 
-    public static void loadAllPolls(ReadyEvent event) {
-
-        event.getJDA().getGuilds().forEach(g -> {
-
-            File voteSave = new File("SERVER_SETTINGS/" + g.getId() + "/vote");
-            if (voteSave.exists()) {
-                try {
-                    voteHash.put(g, getPoll(g));
-                } catch (IOException | ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        });
-
-    }
-
+    /**
+     * Liest das objekt aus der klasse und serialized es als "Poll" klassen instanz
+     * @param guild
+     * @return
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     private static Poll getPoll(Guild guild) throws IOException, ClassNotFoundException {
 
-        if (voteHash.containsKey(guild))
+        if (polls.containsKey(guild))
             return null;
 
         String saveFileName = "SERVER_SETTINGS/" + guild.getId() + "/vote";
@@ -235,6 +239,24 @@ public class Vote implements Command, Serializable {
         return out;
 
     }
+
+
+    public static void loadPolls(JDA jda) {
+
+        jda.getGuilds().forEach(g -> {
+
+            File f = new File("SERVER_SETTINGS/" + g.getId() + "/vote");
+            if (f.exists())
+                try {
+                    polls.put(g, getPoll(g));
+                } catch (IOException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+        });
+
+    }
+
 
 
     @Override
@@ -254,33 +276,31 @@ public class Vote implements Command, Serializable {
         switch (args[0]) {
 
             case "create":
-            case "start":
                 createPoll(args, event);
                 break;
 
             case "v":
-            case "vote":
                 votePoll(args, event);
                 break;
 
-            case "votes":
             case "stats":
-                statsPoll(event);
+                voteStats(event);
                 break;
 
-            case "stop":
-            case "end":
             case "close":
-                closePoll(event);
+                closeVote(event);
                 break;
-
-            default:
-                message(help(), Color.red);
         }
 
-        voteHash.forEach((guild, poll) -> {
+        polls.forEach((guild, poll) -> {
+
+            File path = new File("SERVER_SETTINGS/" + guild.getId() + "/");
+            if (!path.exists()) {
+                path.mkdirs();
+            }
+
             try {
-                savePoll(guild);
+                savePoll(event.getGuild());
             } catch (IOException e) {
                 e.printStackTrace();
             }

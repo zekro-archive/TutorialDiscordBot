@@ -4,13 +4,15 @@ import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
+import java.io.Serializable;
+
 /**
  * © zekro 2017
  *
  * @author zekro
  */
 
-public class readyListener extends ListenerAdapter {
+public class readyListener extends ListenerAdapter implements Serializable {
 
     public void onReady(ReadyEvent event) {
 
@@ -22,7 +24,7 @@ public class readyListener extends ListenerAdapter {
 
         System.out.println(out);
 
-        commands.Vote.loadAllPolls(event);
+        commands.Vote.loadPolls(event.getJDA());
 
         //for (Guild g : event.getJDA().getGuilds() ) {
         //    g.getTextChannels().get(0).sendMessage(

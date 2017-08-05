@@ -63,7 +63,7 @@ public class Main {
     public static void addCommands() {
 
         commandHandler.commands.put("ping", new Ping());
-        commandHandler.commands.put("Say", new Say());
+        commandHandler.commands.put("Say", new say());
         commandHandler.commands.put("test", new Test());
         commandHandler.commands.put("clear", new Clear());
         commandHandler.commands.put("m", new Music());
