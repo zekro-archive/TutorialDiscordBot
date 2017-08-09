@@ -13,3 +13,5 @@
 | #07  	| Clear Command      	| https://youtu.be/xXFypYc5BBc 	| https://gist.github.com/zekroTJA/b69127755f95a156dc8286e525738347 	|
 | #08  	| Music Bot [1/2]     | https://youtu.be/yduGuCOpV2k 	| https://gist.github.com/zekroTJA/2f7728bfe835168fe6f1a46b55d8e3cd 	|
 | #09  	| Music Bot [2/2]     | https://youtu.be/BSsRrquEZSU  | https://gist.github.com/zekroTJA/2f7728bfe835168fe6f1a46b55d8e3cd 	|
+| #10   | Vote Command [1/2]  | https://youtu.be/FRWoCiy8cWs  | https://gist.github.com/zekroTJA/6a64fa891ba08e24a9bda1ef6821f8b7   |
+| #11   | Vote Command [2/2]  |         ~  soon  ~            | https://gist.github.com/zekroTJA/6a64fa891ba08e24a9bda1ef6821f8b7   |
