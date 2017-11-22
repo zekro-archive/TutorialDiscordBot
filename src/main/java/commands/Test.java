@@ -1,7 +1,13 @@
 package commands;
 
+
+import net.dv8tion.jda.core.EmbedBuilder;
+import java.awt.Color;
+
+
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Role;
+import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.List;
@@ -20,12 +26,24 @@ public class Test implements Command {
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
 
-        List<Role> roleList = event.getMessage().getMentionedRoles();
-        Guild guild = event.getGuild();
+        TextChannel channel = event.getTextChannel();
 
-        event.getMessage().getMentionedUsers().stream()
-                .filter(user -> guild.getMember(user).getRoles().stream().anyMatch(role -> roleList.contains(role)))
-                .forEach(user -> guild.getController().removeRolesFromMember(guild.getMember(user), roleList).queue());
+
+        // Create the EmbedBuilder instance
+        EmbedBuilder eb = new EmbedBuilder();
+
+        eb.setTitle("Title", null);
+        //eb.setColor(Color.red);
+        //eb.setColor(new Color(0xF40C0C));
+        eb.setColor(new Color(255, 0, 54));
+        eb.setDescription("Text");
+        eb.addField("Title of field", "test of field", false);
+        //eb.addBlankField(false);
+        //eb.setAuthor("name", null, "https://github.com/zekroTJA/DiscordBot/blob/master/.websrc/zekroBot_Logo_-_round_small.png");
+        eb.setFooter("Text", "https://github.com/zekroTJA/DiscordBot/blob/master/.websrc/zekroBot_Logo_-_round_small.png");
+        eb.setImage("https://github.com/zekroTJA/DiscordBot/blob/master/.websrc/logo%20-%20title.png");
+        eb.setThumbnail("https://github.com/zekroTJA/DiscordBot/blob/master/.websrc/logo%20-%20title.png");
+        channel.sendMessage(eb.build()).queue();
     }
 
     @Override

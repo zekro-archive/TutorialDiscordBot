@@ -1,6 +1,7 @@
 package core;
 
 import commands.*;
+import listeners.AutochannelHanler;
 import listeners.commandListener;
 import listeners.readyListener;
 import listeners.voiceListener;
@@ -28,22 +29,6 @@ public class Main {
 
         builder.setStatus(OnlineStatus.DO_NOT_DISTURB);
 
-        builder.setGame(new Game() {
-            @Override
-            public String getName() {
-                return "v." + STATIC.VERSION ;
-            }
-
-            @Override
-            public String getUrl() {
-                return null;
-            }
-
-            @Override
-            public GameType getType() {
-                return GameType.DEFAULT;
-            }
-        });
 
         addListeners();
         addCommands();
@@ -69,13 +54,15 @@ public class Main {
         commandHandler.commands.put("m", new Music());
         commandHandler.commands.put("music", new Music());
         commandHandler.commands.put("vote", new Vote());
+        commandHandler.commands.put("autochan", new Autochannel());
     }
 
     public static void addListeners() {
 
-        builder.addListener(new commandListener());
-        builder.addListener(new readyListener());
-        builder.addListener(new voiceListener());
+        builder.addEventListener(new commandListener());
+        builder.addEventListener(new readyListener());
+        builder.addEventListener(new voiceListener());
+        builder.addEventListener(new AutochannelHanler());
 
     }
 

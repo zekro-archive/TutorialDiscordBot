@@ -22,7 +22,9 @@ public class readyListener extends ListenerAdapter {
 
         System.out.println(out);
 
-        commands.Vote.loadPolls(event.getJDA());
+        commands.Autochannel.load(event.getJDA());
+
+        //commands.Vote.loadPolls(event.getJDA());
 
         //for (Guild g : event.getJDA().getGuilds() ) {
         //    g.getTextChannels().get(0).sendMessage(
